@@ -1,0 +1,72 @@
+<mvc:View controllerName="sap.demo.bpmrulesshoppingcart.view.Order" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:h="http://www.w3.org/1999/xhtml">
+	<l:VerticalLayout>
+		<form:SimpleForm id="form" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout">
+			<Label text="{i18n>CART_ORDER_NAME_LABEL}"/>
+			<Input id="inputName" type="Text" placeholder="{i18n>CART_ORDER_NAME_PLACEHOLDER}" valueStateText="{i18n>CART_ORDER_NAME_ERROR}"
+				value="{ path : '/name' , type : 'sap.ui.model.type.String', constraints : {minLength: 1, maxLength: 30} }"/>
+			<Label text="{i18n>CART_ORDER_ADDRESS_LABEL}"/>
+			<Input id="inputAddress" type="Text" placeholder="{i18n>CART_ORDER_ADDRESS_PLACEHOLDER}" valueStateText="{i18n>CART_ORDER_ADDRESS_ERROR}"
+				value="{ path : '/address' , type : 'sap.ui.model.type.String', constraints : { minLength: 1, maxLength: 30 } }"/>
+			<Label text="{i18n>CART_ORDER_MAIL_LABEL}"/>
+			<Input id="inputMail" type="Email" placeholder="{i18n>CART_ORDER_MAIL_PLACEHOLDER}" valueStateText="{i18n>CART_ORDER_MAIL_ERROR}"
+				value="{ path : '/mail', type : 'sap.ui.model.type.String', constraints : { minLength: 1, contains: '@' } }"/>
+			<Label text="{i18n>CART_ORDER_CARD_TYPE_LABEL}"/>
+			<Select>
+				<core:Item key="AE" text="American Express"/>
+				<core:Item key="MC" text="Master Card"/>
+				<core:Item key="VISA" text="VISA"/>
+			</Select>
+			<Label text="{i18n>CART_ORDER_CARD_NUMBER_LABEL}"/>
+			<Input id="inputNumber" type="Text" placeholder="{i18n>CART_ORDER_CARD_NUMBER_PLACEHOLDER}"
+				valueStateText="{i18n>CART_ORDER_CARD_NUMBER_ERROR}"
+				value="{ path : '/creditnumber', type : 'sap.ui.model.type.String', constraints : { minLength: 13, maxLength: 20, search: '^\\b(?:\\d[ -]*?){13,16}\\b$' } }"/>
+		</form:SimpleForm>
+		<Table inset="false" items="{path:'/modeldata', sorter : { path: 'Name'}}">
+			<headerToolbar>
+				<Toolbar>
+					<Title text="{i18n>SHIPMENTS_TABLE_TITLE}" level="H3"/>
+					<ToolbarSpacer></ToolbarSpacer>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="10em">
+					<Text text="{i18n>SHIPMENT_PRODUCT_NAME}"/>
+				</Column>
+				<Column >
+					<Text text="{i18n>SHIPMENT_PRICE}"/>
+				</Column>
+				<Column >
+					<Text text="{i18n>SHIPMENT_DISCOUNT}"/>
+				</Column>
+				<Column width="10em">
+					<Text text="{i18n>SHIPMENT_COST}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>SHIPMENT_TIME}"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{Name} (x{Quantity})"/>
+						<Text text="{TotalPrice} EUR"/>
+						<Text text="{Discount} %"/>
+						<Text text="{ShipmentCost} EUR"/>
+						<Text text="{ShipmentTime}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<Toolbar>
+			<l:VerticalLayout>
+				<l:HorizontalLayout>
+					<core:Icon visible="{path: '/showSeasonalOffer'}" src="sap-icon://blank-tag-2" color="#FFBF00" size="1rem" tooltip="Seasonal Discount"/>
+					<Text text="{/seasonalOffer}" class="seasonalDiscount" />
+				</l:HorizontalLayout>
+				<Text text="{i18n>SHIPMENT_GROSS_TOTAL}: {/grossprice} EUR" class="grossTotal"/>
+				<ToolbarSpacer/>
+			</l:VerticalLayout>
+		</Toolbar>
+	</l:VerticalLayout>
+</mvc:View>

@@ -1,0 +1,49 @@
+[
+	{
+		"CategoryName" : "Smartphones & Tablets",
+		"Category" : "Smartphones & Tablets",
+		"NumberOfProducts" : 9
+	},
+	{
+		"CategoryName" : "Flat Screen TVs",
+		"Category" : "Flat Screen TVs",
+		"NumberOfProducts" : 3
+	},
+	{
+		"CategoryName" : "Speakers",
+		"Category" : "Speakers",
+		"NumberOfProducts" : 3
+	},
+	{
+		"CategoryName" : "Telecommunication",
+		"Category" : "Telecommunication",
+		"NumberOfProducts" : 3
+	},
+	{
+		"CategoryName" : "Scanners",
+		"Category" : "Scanners",
+		"NumberOfProducts" : 2
+	},{
+		"CategoryName" : "Flat Screens",
+		"Category" : "Flat Screens",
+		"NumberOfProducts" : 3
+	},{
+		"CategoryName" : "Keyboards",
+		"Category" : "Keyboards",
+		"NumberOfProducts" : 4
+	},{
+		"CategoryName" : "Mice",
+		"Category" : "Mice",
+		"NumberOfProducts" : 5
+	},{
+		"CategoryName" : "Graphics Card",
+		"Category" : "Graphics Card",
+		"NumberOfProducts" : 2
+	},
+	{
+		"CategoryName" : "Software",
+		"Category" : "Software",
+		"NumberOfProducts" : 4
+	}
+	
+]

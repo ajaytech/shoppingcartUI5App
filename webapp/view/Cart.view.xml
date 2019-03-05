@@ -1,0 +1,146 @@
+<mvc:View controllerName="sap.demo.bpmrulesshoppingcart.view.Cart"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="{cfg>/pageTitle}"
+		showNavButton="{cfg>/notInDelete}"
+		navButtonPress="handleNavButtonPress"
+		showFooter="true" >
+		<headerContent>
+			<Button
+				id="editButton"
+				icon="sap-icon://edit"
+				enabled="{cartProducts>/showEditAndProceedButton}"
+				visible="{cfg>/notInDelete}"
+				press="handleEditOrDoneButtonPress" />
+		</headerContent>
+		<footer>
+			<Toolbar>
+				<Text
+					text="{
+						path : 'cartProducts>/cartEntries',
+						formatter : '.formatter.totalPrice'
+					} EUR" />
+				<ToolbarSpacer/>
+				<Button
+					id="proceedButton"
+					type="Accept"
+					text="{i18n>CART_PROCEED_BUTTON_TEXT}"
+					tooltip="{i18n>CART_PROCEED_BUTTON_TOOLTIP}"
+					enabled="{cartProducts>/showEditAndProceedButton}"
+					visible="{cfg>/notInDelete}"
+					press="handleProceedButtonPress" />
+				<Button
+					id="doneButton"
+					text="{i18n>CART_DONE_BUTTON_TEXT}"
+					tooltip="{i18n>CART_DONE_BUTTON_TOOLTIP}"
+					icon="sap-icon://accept"
+					enabled="true"
+					visible="{cfg>/inDelete}"
+					press="handleEditOrDoneButtonPress" />
+			</Toolbar>
+		</footer>
+		<content>
+			<List
+				id="entryList"
+				footerText="{i18n>CART_SAVED_FOR_LATER_FOOTER_TEXT}"
+				mode="{cfg>/listMode}"
+				delete="handleEntryListDelete"
+				select="handleEntryListSelect"
+				noDataText="{i18n>CART_NO_DATA}"
+				items="{
+					path : 'cartProducts>/cartEntries',
+					sorter : {
+						path : 'Name',
+						descending : false
+					}
+				}">
+				<items>
+					<ObjectListItem
+						intro="{cartProducts>Quantity} x"
+						type="{cfg>/listItemType}"
+						icon="{
+							path : 'cartProducts>PictureUrl',
+							formatter : '.formatter.pictureUrl'
+						}"
+						title="{cartProducts>Name}"
+						number="{
+							path : 'cartProducts>Price',
+							formatter : '.formatter.price'
+						}"
+						numberUnit="EUR"
+						press="handleEntryListPress"
+						iconDensityAware="false" >
+						<attributes>
+							<ObjectAttribute
+								active="true"
+								press="onSaveForLater"
+								text="{i18n>CART_SAVE_FOR_LATER_LINK_TEXT}" />
+						</attributes>
+						<firstStatus>
+							<ObjectStatus
+								text="{
+									path : 'cartProducts>status',
+									formatter : '.formatter.statusText'
+								}"
+								state="{
+									path : 'cartProducts>status',
+									formatter : '.formatter.statusState'
+								}" />
+						</firstStatus>
+					</ObjectListItem>
+				</items>
+			</List>
+			<List
+				id="saveForLaterList"
+				mode="{cfg>/listMode}"
+				showNoData="false"
+				delete="handleEntryListDelete"
+				select="handleEntryListSelect"
+				items="{
+					path : 'cartProducts>/savedForLaterEntries',
+					sorter : {
+						path : 'Name',
+						descending : false
+					}
+				}">
+				<items>
+					<ObjectListItem
+						type="{cfg>/listItemType}"
+						icon="{
+							path : 'cartProducts>PictureUrl',
+							formatter : '.formatter.pictureUrl'
+						}"
+						title="{cartProducts>Name}"
+						number="{
+							path : 'cartProducts>Price',
+							formatter : '.formatter.price'
+						}"
+						numberUnit="EUR"
+						press="handleEntryListPress"
+						iconDensityAware="false" >
+						<attributes>
+							<ObjectAttribute
+								active="true"
+								press="onAddBackToCart"
+								text="{i18n>CART_ADD_TO_CART_LINK_TEXT}" />
+						</attributes>
+						<firstStatus>
+							<ObjectStatus
+								text="{
+									path : 'cartProducts>status',
+									formatter : '.formatter.statusText'
+								}"
+								state="{
+									path : 'cartProducts>status',
+									formatter : '.formatter.statusState'
+								}" />
+						</firstStatus>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>
